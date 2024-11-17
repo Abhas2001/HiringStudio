@@ -8,14 +8,15 @@ const Navigation = () => {
     const[hidebtn,sethidebtn] = useState(false);
     const[more,setmore]= useState(false);
     const[count,setcount]=useState(1);
-    const[arr] = useState([0]);
+    const[opt,setopt]=useState();
+    const[arr,setarr] = useState([0]);
  
 
     const handleadd = () =>{
         setcount(count+1);
         arr.push(count);
     }
-    console.log(arr);
+    // console.log(arr);
     const handlehide=()=>{
         sethide(true);
     }
@@ -24,10 +25,20 @@ const Navigation = () => {
         sethide(false);
     }
 
-    const handlemore  = () =>{
+    const handlemore  = (x) =>{
+        setopt(x)
          setmore(!more);
     }
-    console.log(hide);
+    const handledelete = (x) =>{
+       console.log(arr);
+   
+        let newarr=arr.filter(item => item !== x)
+
+        console.log(newarr);
+        setarr(newarr);
+    }
+    // console.log(opt);
+    // console.log(arr);
   return (
     <div className={`text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[224px]':'w-[100px]'} h-[93vh] rounded-md`}>
       <section onMouseEnter={()=>{sethidebtn(true)}} onMouseLeave={()=>{sethidebtn(false)}} className='h-[80px] border-b-[1px] border-gray-500 p-[20px]'>
@@ -54,24 +65,24 @@ const Navigation = () => {
         
 
         <div className='flex flex-col gap-y-1'>
-        { arr.map(()=>{
+        { arr.map((x)=>{
 
        return(
         <section className='w-[100%] flex justify-between p-4 '>
-            <div className='font-serif text-[12px] text-white'>
+            <div className='font-serif text-[12px] text-white' >
                 Untitled
 
                 <div className='font-thin text-[10px] text-gray-500'>
-                    x minutes ago
+                    {x} minutes ago
                 </div>
             </div>
-            <div className={`h-2 w-2  ${more==true?'mt-8':'mt-2'}  flex flex-col justify-center items-center ${more==true? 'bg-[#282c34]':null}`}>
-            <button className='text-[12px] leading-none' onClick={handlemore}>...
+            <div className={`h-2 w-2  ${more==true?'mt-8':'mt-2'}  flex flex-col justify-center items-center ${more==true && x==opt? 'bg-[#282c34]':null}`}>
+            <button className='text-[12px] leading-none' onClick={()=>{handlemore(x)}}>...
             
-            {more==true?
+            {more==true && x==opt?
             <div className='w-20 h-14 p-2 flex flex-col gap-2 bg-[#282c34] relative mt-1  left-6'>
                 <button >share</button>
-                <button>delete</button>
+                <button onClick={()=>{handledelete(opt)}}>delete</button>
             </div>
             :
             null
