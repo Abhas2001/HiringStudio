@@ -1,4 +1,5 @@
 import React from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react'
 
 const Navigation = () => {
@@ -10,13 +11,29 @@ const Navigation = () => {
     const[count,setcount]=useState(1);
     const[opt,setopt]=useState();
     const[arr,setarr] = useState([0]);
- 
+    const[loader,setloader] = useState(false);
 
+    console.log(loader);
+   
+    
     const handleadd = () =>{
-        setcount(count+1);
-        arr.push(count);
+        setloader(true);
+       
+        setTimeout(() => {
+
+            
+            setcount(count+1);
+      
+            arr.push(count);
+            setloader(false);
+            
+        }, 2000);
+   
+        
     }
-    // console.log(arr);
+   
+    
+ 
     const handlehide=()=>{
         sethide(true);
     }
@@ -37,8 +54,7 @@ const Navigation = () => {
         console.log(newarr);
         setarr(newarr);
     }
-    // console.log(opt);
-    // console.log(arr);
+  
   return (
     <div className={`text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[224px]':'w-[100px]'} h-[93vh] rounded-md`}>
       <section onMouseEnter={()=>{sethidebtn(true)}} onMouseLeave={()=>{sethidebtn(false)}} className='h-[80px] border-b-[1px] border-gray-500 p-[20px]'>
@@ -68,7 +84,9 @@ const Navigation = () => {
         { arr.map((x)=>{
 
        return(
+        <div>
         <section className='w-[100%] flex justify-between p-4 '>
+            
             <div className='font-serif text-[12px] text-white' >
                 Untitled
 
@@ -91,9 +109,22 @@ const Navigation = () => {
 
            
             </div>
+
+           
         </section>
+       {loader && x==opt?
+        <div>loading</div>
+        :
+        null
+       }
+        </div>
+       
+
+        
        )
+       
          })
+         
 }
 </div>
         </section>

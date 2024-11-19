@@ -1,5 +1,5 @@
 import Navigation from './Navigation';
-import Mobile from './mobile';
+import Mobile from './Mobile';
 import './App.css';
 
 function App() {
