@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useState } from "react";
 
 
@@ -8,17 +9,33 @@ function Mobile(){
     const[chatarr,setchatarr]=useState([]);
     const[chat,setchat]=useState(false);
     const[loaded,setloaded]=useState(false);
+    const[inbox,setinbox]=useState([]);
 
    const Startarr=['Hi','Hello','Hey'];
+   console.log(inbox);
    console.log(chatarr);
 
     const handleupload = () =>{
        setchat(true);
      
-       setchatarr((prev)=>[...prev,inputval]);
+       setchatarr((prev)=>[...prev,{'question':inputval}]);
+
+       
+    
 
     }
 
+
+    useEffect(()=>{
+
+        if(chatarr.length>0&& chatarr.some(item=> Startarr.includes(item.question))){
+
+            console.log('milgaya');
+            setinbox((prev)=>[...prev,{'question':inputval,'answer':'Hello! Could you share the job title of the position youre hiring for?'}]);
+            
+            }
+
+    },[chatarr])
     const handlechange = (e) =>{
       
         setinputval(e.target.value);
@@ -27,8 +44,9 @@ function Mobile(){
 
     setTimeout(() => {
 
-        if(Startarr.includes(chatarr[0])){
+        if(chatarr.length>0&&Startarr.includes(chatarr[0].question)){
         setloaded(true);
+        
         }
         else{
             setloaded(false);
@@ -51,30 +69,33 @@ function Mobile(){
     {chat?
     <div>
     
-    {chatarr.map((x)=>{return(
+    {inbox.map((x)=>{return(
+        <div>
     <div className="w-[100%] h-[80px]">
         
     <div className="float-end  bg-[green] w-auto p-4 rounded-lg m-4 bg-opacity-25 text-white">
-      {x}
+      {x.question}
 
     </div>
+  </div>
+  {loaded==true && chat==true?
+  <div className="bg-[#DBE7FA] w-[60%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
+ {x.answer}
+  </div>
+  :
+   loaded==false && chat==true?
+<div className="bg-[#DBE7FA] w-[20%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
+   Thinking...
+</div>
+:
+<div></div>
+    }
   </div>
   )})
 }
 </div>
   
     :<div></div>
-}
-{loaded==true && chat==true?
-<div className="bg-[#DBE7FA] w-[60%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
-Hello! Could you share the job title of the position you're hiring for?
-</div>
-: loaded==false && chat==true?
-<div className="bg-[#DBE7FA] w-[20%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
-   Thinking...
-</div>
-:
-<div></div>
 }
 
     </div>
