@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 
-const Navigation = () => {
+const Navigation = (props) => {
 
     const[hide,sethide] = useState(false);
     const[light,setlight] = useState(false);
@@ -15,7 +15,10 @@ const Navigation = () => {
 
     console.log(loader);
    
-    
+    const handleopen = (x) =>{
+        props.setitems(x);
+        props.setshowmobile(true);
+    }
     const handleadd = () =>{
         setloader(true);
        
@@ -85,9 +88,9 @@ const Navigation = () => {
 
        return(
         <div>
-        <section className='w-[100%] flex justify-between p-4 '>
+        <section className='w-[100%] flex justify-between p-4 ' onClick={()=>{handleopen(x)}}>
             
-            <div className='font-serif text-[12px] text-white' >
+            <div className='font-serif text-[12px] text-white'  >
                 Untitled
 
                 <div className='font-thin text-[10px] text-gray-500'>

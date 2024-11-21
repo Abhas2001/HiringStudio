@@ -3,13 +3,16 @@ import { useState } from "react";
 
 
 
-function Mobile(){
+function Mobile(props){
 
     const[inputval,setinputval]=useState('');
     const[chatarr,setchatarr]=useState([]);
     const[chat,setchat]=useState(false);
     const[loaded,setloaded]=useState(false);
     const[inbox,setinbox]=useState([]);
+    
+   
+   console.log('arr'+props.items);
 
    const Startarr=['Hi','Hello','Hey'];
    console.log(inbox);
@@ -59,7 +62,7 @@ function Mobile(){
     <div>
     <div className="bg-[#DBE7FA] w-[60%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
        
-    Hey! I'm an LLM fine-tuned to help generate interview questions!
+  {props.items} Hey! I'm an LLM fine-tuned to help generate interview questions!
 
     </div>
     <div className="bg-[#DBE7FA] w-[60%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
