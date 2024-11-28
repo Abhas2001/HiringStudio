@@ -13,13 +13,16 @@ const Navigation = (props) => {
     const[arr,setarr] = useState([0]);
     const[loader,setloader] = useState(false);
 
-    console.log(loader);
-   
+    console.log(arr);
+    props.settotal(arr.length)
+    
     const handleopen = (x) =>{
+        props.setactiveitems(x);
         props.setitems(x);
         props.setshowmobile(true);
     }
     const handleadd = () =>{
+        
         setloader(true);
        
         setTimeout(() => {

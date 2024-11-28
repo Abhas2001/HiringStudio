@@ -10,14 +10,32 @@ function Mobile(props){
     const[chat,setchat]=useState(false);
     const[loaded,setloaded]=useState(false);
     const[inbox,setinbox]=useState([]);
+    const[fixedarr,setfixedarr] = useState(new Array(props.total).fill(0))
+     
+
+    let index = props.items
+    useEffect(()=>{
+        setinbox([])
+    },[index])
+ 
+   useEffect(()=>{
+     setfixedarr(new Array(props.total).fill(0))
+    },[props.total])
+  
+    fixedarr[index]=inbox;
+
+    console.log(fixedarr);
     
    
-   console.log('arr'+props.items);
+   
 
    const Startarr=['Hi','Hello','Hey'];
-   console.log(inbox);
-   console.log(chatarr);
+   
+  
+  
+  
 
+   
     const handleupload = () =>{
        setchat(true);
      
@@ -28,12 +46,14 @@ function Mobile(props){
 
     }
 
+    console.log(chatarr);
+    
 
     useEffect(()=>{
 
         if(chatarr.length>0&& chatarr.some(item=> Startarr.includes(item.question))){
 
-            console.log('milgaya');
+           
             setinbox((prev)=>[...prev,{'question':inputval,'answer':'Hello! Could you share the job title of the position youre hiring for?'}]);
             
             }
@@ -72,7 +92,7 @@ function Mobile(props){
     {chat?
     <div>
     
-    {inbox.map((x)=>{return(
+    {(fixedarr[index]||[]).map((x)=>{return(
         <div>
     <div className="w-[100%] h-[80px]">
         
