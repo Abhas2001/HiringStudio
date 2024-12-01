@@ -17,7 +17,7 @@ function App() {
        {showmobile==true?
        <Mobile items={items}/>
        :
-       <Mobile/>
+      <div>hello</div>
 }
     </div>
   );

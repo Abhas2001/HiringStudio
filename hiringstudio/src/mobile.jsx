@@ -10,9 +10,13 @@ function Mobile(props){
     const[chat,setchat]=useState(false);
     const[loaded,setloaded]=useState(false);
     const[inbox,setinbox]=useState([]);
+    const[fixedarr,setfixedarr]=useState(Array(10).fill(0));
+    const[newarr,setnewarr]=useState([]);
     
    
-   console.log('arr'+props.items);
+    console.log(fixedarr);
+    let index = props.items;
+   console.log(index);
 
    const Startarr=['Hi','Hello','Hey'];
    console.log(inbox);
@@ -28,6 +32,17 @@ function Mobile(props){
 
     }
 
+    useEffect(()=>{
+        setnewarr(fixedarr)
+        setinbox([]);
+    },[index])
+    
+
+    useEffect(()=>{
+        fixedarr[index]=[...inbox];
+    },[chatarr])
+       
+    
 
     useEffect(()=>{
 
@@ -72,7 +87,7 @@ function Mobile(props){
     {chat?
     <div>
     
-    {inbox.map((x)=>{return(
+    {(fixedarr[index]||[]).map((x)=>{return(
         <div>
     <div className="w-[100%] h-[80px]">
         
