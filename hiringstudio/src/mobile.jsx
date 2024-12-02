@@ -13,7 +13,10 @@ function Mobile(props){
     const[fixedarr,setfixedarr]=useState(Array(10).fill(0));
     const[newarr,setnewarr]=useState([]);
     
-   
+    console.log(fixedarr);
+    if(chatarr.length>0){
+   props.setinputvalue(chatarr[0].question);
+    }
     console.log(fixedarr);
     let index = props.items;
    console.log(index);
@@ -39,21 +42,26 @@ function Mobile(props){
     
 
     useEffect(()=>{
-        fixedarr[index]=[...inbox];
+        fixedarr[index]=[...chatarr];
     },[chatarr])
        
     
-
-    useEffect(()=>{
-
-        if(chatarr.length>0&& chatarr.some(item=> Startarr.includes(item.question))){
-
-            console.log('milgaya');
-            setinbox((prev)=>[...prev,{'question':inputval,'answer':'Hello! Could you share the job title of the position youre hiring for?'}]);
-            
+    useEffect(() => {
+        if (chatarr.length > 0) {
+            const lastInput = chatarr[chatarr.length - 1].question;
+            if (Startarr.includes(lastInput)) {
+                setinbox((prev) => [
+                    ...prev,
+                    { question: lastInput, answer: "Hello! Could you share the job title of the position you're hiring for?" }
+                ]);
+            } else {
+                setinbox((prev) => [
+                    ...prev,
+                    { question: lastInput, answer: "I'm sorry, I didn't understand that. Could you clarify?" }
+                ]);
             }
-
-    },[chatarr])
+        }
+    }, [chatarr]);
     const handlechange = (e) =>{
       
         setinputval(e.target.value);
@@ -71,7 +79,7 @@ function Mobile(props){
         }
     }, 2000);
     return(
-        <div className='h-[93vh] w-[50vh] bg-[#DBE7FA] border-[0.5px] border-white bg-opacity-10 rounded-lg'>
+        <div className='h-[93vh] w-[100vh] bg-[#DBE7FA] border-[0.5px] border-white bg-opacity-10 rounded-lg'>
 
    <div className="h-[100%] flex flex-col justify-between">
     <div>
