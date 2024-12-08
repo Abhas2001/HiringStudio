@@ -11,6 +11,7 @@ function Mobile(props){
     const[chat,setchat]=useState(false);
     const[loaded,setloaded]=useState(false);
     const[inbox,setinbox]=useState([]);
+<<<<<<< HEAD
     const[fixedarr,setfixedarr] = useState(new Array(props.total).fill(0))
     const[hover,sethover]=useState(false);
 
@@ -47,6 +48,18 @@ function Mobile(props){
     
    
    
+=======
+    const[fixedarr,setfixedarr]=useState(Array(10).fill(0));
+    const[newarr,setnewarr]=useState([]);
+    
+    console.log(fixedarr);
+    if(chatarr.length>0){
+   props.setinputvalue(chatarr[0].question);
+    }
+    console.log(fixedarr);
+    let index = props.items;
+   console.log(index);
+>>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
 
    const Startarr=['Hi','Hello','Hey'];
 
@@ -67,6 +80,7 @@ function Mobile(props){
 
     }
 
+<<<<<<< HEAD
     console.log(chatarr);
     
 
@@ -86,7 +100,35 @@ function Mobile(props){
         
         } 
 
+=======
+    useEffect(()=>{
+        setnewarr(fixedarr)
+        setinbox([]);
+    },[index])
+    
+
+    useEffect(()=>{
+        fixedarr[index]=[...chatarr];
+>>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
     },[chatarr])
+       
+    
+    useEffect(() => {
+        if (chatarr.length > 0) {
+            const lastInput = chatarr[chatarr.length - 1].question;
+            if (Startarr.includes(lastInput)) {
+                setinbox((prev) => [
+                    ...prev,
+                    { question: lastInput, answer: "Hello! Could you share the job title of the position you're hiring for?" }
+                ]);
+            } else {
+                setinbox((prev) => [
+                    ...prev,
+                    { question: lastInput, answer: "I'm sorry, I didn't understand that. Could you clarify?" }
+                ]);
+            }
+        }
+    }, [chatarr]);
     const handlechange = (e) =>{
       
         setinputval(e.target.value);
@@ -116,8 +158,12 @@ function Mobile(props){
 
  
     return(
+<<<<<<< HEAD
 
         <div className='h-[93vh] w-[65vh] bg-[#DBE7FA] border-[0.1px] border-white bg-opacity-10 rounded-lg' onMouseEnter={()=>{sethover(true)}} onMouseLeave={()=>{sethover(false)}}>
+=======
+        <div className='h-[93vh] w-[100vh] bg-[#DBE7FA] border-[0.5px] border-white bg-opacity-10 rounded-lg'>
+>>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
 
    <div className="h-[100%] flex flex-col justify-between">
     <div className={ `${hover? 'scrollclass':'scrollhidden'}`}>
