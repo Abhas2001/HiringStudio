@@ -2,6 +2,7 @@ import Navigation from './Navigation';
 import Mobile from './Mobile';
 import './App.css';
 import { useEffect, useState } from 'react';
+import Questions from './Questions';
 
 function App() {
   
@@ -11,7 +12,17 @@ function App() {
   const[activeitems,setactiveitems]=useState(null);
   const[total,settotal] = useState([])
   
+  const[inputvalue,setinputvalue]=useState([]);
 
+  const[finalvalue,setfinalvalue]=useState([]);
+  
+  
+  
+  if(inputvalue?.question){
+    setfinalvalue(inputvalue.question)
+  }
+
+  
   
 
   
@@ -21,9 +32,11 @@ function App() {
        <Navigation settotal={settotal} setshowmobile={setshowmobile} items={items} setitems={setitems} setactiveitems={setactiveitems}  />
               
        {showmobile==true&&
-       <Mobile items={items} total={total} />
+       <Mobile items={items} total={total} setinputvalue={setinputvalue} />
 
 }
+
+   <Questions finalvalue={finalvalue} />
     </div>
   );
 }

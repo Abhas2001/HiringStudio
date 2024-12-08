@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import  './Mobile.css'
 
 
 
@@ -11,6 +12,11 @@ function Mobile(props){
     const[loaded,setloaded]=useState(false);
     const[inbox,setinbox]=useState([]);
     const[fixedarr,setfixedarr] = useState(new Array(props.total).fill(0))
+    const[hover,sethover]=useState(false);
+
+   
+    props.setinputvalue(chatarr[chatarr.length-1])
+    
      
 
     let index = props.items
@@ -21,8 +27,21 @@ function Mobile(props){
    useEffect(()=>{
      setfixedarr(new Array(props.total).fill(0))
     },[props.total])
+
+    useEffect(()=>{
+        
+        const updatedFixedArr = [...fixedarr];
+
+        updatedFixedArr[index] = inbox;
+    
+       
+        setfixedarr(updatedFixedArr);
+        
+    },[inbox])
   
-    fixedarr[index]=inbox;
+   
+    console.log(chatarr);
+    
 
     console.log(fixedarr);
     
@@ -30,6 +49,8 @@ function Mobile(props){
    
 
    const Startarr=['Hi','Hello','Hey'];
+
+   const Questionarr=['SoftwareEngineer','BuisnessAnalyst','DataAnalyst','Testing']
    
   
   
@@ -55,8 +76,15 @@ function Mobile(props){
 
            
             setinbox((prev)=>[...prev,{'question':inputval,'answer':'Hello! Could you share the job title of the position youre hiring for?'}]);
-            
+         
             }
+
+         else if(chatarr.length>0 && chatarr.some(item=> Questionarr.includes(item.question)))  {
+
+            setinbox((prev)=>[...prev,{'question':inputval,'answer':'Thank you for sharing the role! Here are top five questions.'}]);
+         
+        
+        } 
 
     },[chatarr])
     const handlechange = (e) =>{
@@ -65,21 +93,34 @@ function Mobile(props){
 
     }
 
+  
+    
     setTimeout(() => {
+      
+   
 
         if(chatarr.length>0&&Startarr.includes(chatarr[0].question)){
         setloaded(true);
         
         }
+
+        
+      else if(chatarr.length>0&&Questionarr.includes(chatarr[0].question)){
+            setloaded(true);
+            
+            }
         else{
             setloaded(false);
         }
-    }, 2000);
+    }, 4000);
+
+ 
     return(
-        <div className='h-[93vh] w-[50vh] bg-[#DBE7FA] border-[0.5px] border-white bg-opacity-10 rounded-lg'>
+
+        <div className='h-[93vh] w-[65vh] bg-[#DBE7FA] border-[0.1px] border-white bg-opacity-10 rounded-lg' onMouseEnter={()=>{sethover(true)}} onMouseLeave={()=>{sethover(false)}}>
 
    <div className="h-[100%] flex flex-col justify-between">
-    <div>
+    <div className={ `${hover? 'scrollclass':'scrollhidden'}`}>
     <div className="bg-[#DBE7FA] w-[60%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
        
   {props.items} Hey! I'm an LLM fine-tuned to help generate interview questions!
@@ -101,18 +142,15 @@ function Mobile(props){
 
     </div>
   </div>
-  {loaded==true && chat==true?
+  
   <div className="bg-[#DBE7FA] w-[60%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
- {x.answer}
+ {loaded&&chat? x.answer:'Thinking...'}
   </div>
-  :
-   loaded==false && chat==true?
-<div className="bg-[#DBE7FA] w-[20%] p-4 rounded-lg m-4 bg-opacity-15 text-white">
-   Thinking...
-</div>
+ 
 :
+
 <div></div>
-    }
+    
   </div>
   )})
 }
