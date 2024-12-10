@@ -36,11 +36,11 @@ const Questions = (props) => {
    
    
   return (
-    <section className={isMobile?'w-[169%]':'w-full'}>
+    <section className={isMobile?'w-[169%] pr-3':'w-full'}>
     <div className='w-full border-b-[2px]'>
       <p className='text-white font-bold text-xl'>Questions</p>
     </div>
-    <section className='mt-4 flex flex-col gap-8'>
+    <section className={isMobile?'mt-4 flex flex-col gap-[25px]':'mt-4 flex flex-col gap-8'}>
         {data[value[value.length-1]?.question]?data[value[value.length-1].question].map((x)=>{
 
             return(

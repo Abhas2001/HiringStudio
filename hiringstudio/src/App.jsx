@@ -33,7 +33,7 @@ console.log(isMobile);
   
  
   return (
-    <div className={isMobile?"m-1 flex gap-4 h-[100vh] overflow-y-hidden":"m-8 flex gap-10"}>
+    <div className={isMobile?"mt-[1.25rem] flex gap-4 h-[100vh] overflow-y-hidden":"m-8 flex gap-10"}>
        <Navigation settotal={settotal} setshowmobile={setshowmobile} items={items} setitems={setitems} setactiveitems={setactiveitems}  />
               
        {showmobile===true&&

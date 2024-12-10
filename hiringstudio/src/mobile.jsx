@@ -129,7 +129,7 @@ function Mobile(props){
     return(
         <section className={isMobile?"w-[169%] flex justify-between gap-[20px]":"w-full flex justify-between gap-[40px]"}>
 
-        <div className={isMobile?'h-[93vh] flex w-[165vh] bg-[#DBE7FA] border-[0.1px] border-white bg-opacity-10 rounded-lg text-[10px]':'h-[93vh] flex w-[95vh] bg-[#DBE7FA] border-[0.1px] border-white bg-opacity-10 rounded-lg'} onMouseEnter={()=>{sethover(true)}} onMouseLeave={()=>{sethover(false)}}>
+        <div className={isMobile?'h-[85vh] flex w-[119vh] bg-[#DBE7FA] border-[0.1px] border-white bg-opacity-10 rounded-lg text-[10px]':'h-[93vh] flex w-[95vh] bg-[#DBE7FA] border-[0.1px] border-white bg-opacity-10 rounded-lg'} onMouseEnter={()=>{sethover(true)}} onMouseLeave={()=>{sethover(false)}}>
 
    <div className="h-[100%] flex flex-col justify-between">
     <div className={ `${hover? 'scrollclass':'scrollhidden'}`}>

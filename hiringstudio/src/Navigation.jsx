@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useState } from 'react'
 import { useMobile } from './useMobile';
 
+
 const Navigation = (props) => {
 
     const[hide,sethide] = useState(false);
@@ -64,7 +65,7 @@ const Navigation = (props) => {
     }
   
   return (
-    <div className={isMobile? `text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[120px]':'w-[100px]'} h-[93vh] rounded-md`: `text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[324px]':'w-[100px]'} h-[93vh] rounded-md`}>
+    <div className={isMobile? `text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[120px]':'w-[100px]'} h-[85vh] rounded-md`: `text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[324px]':'w-[100px]'} h-[93vh] rounded-md`}>
       <section onMouseEnter={()=>{sethidebtn(true)}} onMouseLeave={()=>{sethidebtn(false)}} className='h-[80px] border-b-[1px] border-gray-500 p-[20px]'>
         <div className='flex justify-between'>
 
@@ -82,9 +83,9 @@ const Navigation = (props) => {
 
 
       <section className='h-[50vh]'>
-        <div className='flex justify-between p-4 text-gray-500'>
+        <div className={isMobile?'flex justify-between p-4 gap-2 text-gray-500':'flex justify-between p-4 text-gray-500'}>
             <h1 className='text-[14px] font-semibold'>QUESTIONS</h1>
-            <button className='w-5 h-5 rounded-full bg-[#282c34] flex justify-center items-center text-white' onClick={handleadd}>+</button>
+            <button className='w-5 h-4 rounded-full flex justify-center items-center text-white' onClick={handleadd}>+</button>
         </div>
         
 
@@ -106,9 +107,13 @@ const Navigation = (props) => {
             <button className='text-[12px] leading-none' onClick={()=>{handlemore(x)}}>...
             
             {more==true && x==opt?
-            <div className='w-20 h-14 p-2 flex flex-col gap-2 bg-[#282c34] relative mt-1  left-6'>
-                <button >share</button>
+            <div className='w-12 h-14 border-[1px] rounded-md flex flex-col gap-2 bg-[#282c34] relative mt-1  left-6'>
+                <div>
+                <button className='border-b-[1px] p-2'>share</button>
+                </div>
+                <div >
                 <button onClick={()=>{handledelete(opt)}}>delete</button>
+                </div>
             </div>
             :
             null
