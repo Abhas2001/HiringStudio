@@ -1,63 +1,47 @@
 import Navigation from './Navigation';
 import Mobile from './Mobile';
 import './App.css';
-<<<<<<< HEAD
 import { useEffect, useState } from 'react';
 import Questions from './Questions';
-=======
-import Questions from './Questions';
-import { useState } from 'react';
->>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
+import { useMobile } from './useMobile';
+
+import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 function App() {
+  
+
+let isMobile = useMobile();
+
   
 
   const[showmobile,setshowmobile] = useState(false);
   const[items,setitems]=useState();
   const[activeitems,setactiveitems]=useState(null);
-<<<<<<< HEAD
   const[total,settotal] = useState([])
   
   const[inputvalue,setinputvalue]=useState([]);
 
-  const[finalvalue,setfinalvalue]=useState([]);
+  // const[finalvalue,setfinalvalue]=useState([]);
   
   
-  
-  if(inputvalue?.question){
-    setfinalvalue(inputvalue.question)
-  }
+console.log(isMobile);
+
 
   
   
 
   
  
-=======
-  const[inputvalue,setinputvalue]=useState([]);
-console.log(inputvalue);
->>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
   return (
-    <div className="m-8 flex gap-10">
+    <div className={isMobile?"m-1 flex gap-4 h-[100vh] overflow-y-hidden":"m-8 flex gap-10"}>
        <Navigation settotal={settotal} setshowmobile={setshowmobile} items={items} setitems={setitems} setactiveitems={setactiveitems}  />
               
-       {showmobile==true&&
-       <Mobile items={items} total={total} setinputvalue={setinputvalue} />
+       {showmobile===true&&
+       <Mobile items={items} total={total} setinputvalue={setinputvalue}/>
 
-<<<<<<< HEAD
 }
 
-   <Questions finalvalue={finalvalue} />
-=======
-       {showmobile==true?
-       <Mobile items={items} setinputvalue={setinputvalue}/>
-       :
-      <div>hello</div>
-}
-
-<Questions inputvalue={inputvalue}/>
-
->>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
+   {/* <Questions final={inputvalue} /> */}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
+import { useMobile } from './useMobile';
 
 const Navigation = (props) => {
 
@@ -13,9 +14,10 @@ const Navigation = (props) => {
     const[arr,setarr] = useState([0]);
     const[loader,setloader] = useState(false);
 
-    console.log(arr);
     props.settotal(arr.length)
     
+
+    let isMobile = useMobile();
     const handleopen = (x) =>{
         props.setactiveitems(x);
         props.setitems(x);
@@ -62,7 +64,7 @@ const Navigation = (props) => {
     }
   
   return (
-    <div className={`text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[324px]':'w-[100px]'} h-[93vh] rounded-md`}>
+    <div className={isMobile? `text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[120px]':'w-[100px]'} h-[93vh] rounded-md`: `text-white bg-black border-[1px] border-gray-500 ${hide==false?'w-[324px]':'w-[100px]'} h-[93vh] rounded-md`}>
       <section onMouseEnter={()=>{sethidebtn(true)}} onMouseLeave={()=>{sethidebtn(false)}} className='h-[80px] border-b-[1px] border-gray-500 p-[20px]'>
         <div className='flex justify-between'>
 

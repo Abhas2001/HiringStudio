@@ -1,34 +1,56 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import data from './data';
+import { useMobile } from './useMobile';
 
 const Questions = (props) => {
-<<<<<<< HEAD
 
+  let isMobile = useMobile();
+  
+  const[length,setlength] = useState([])
+  const[value,setvalue] = useState([]);
+   
+  useEffect(()=>{
+   if(props.chatarr.length>0){
+      setlength(props.chatarr.length)
+   }
+  },[props.chatarr.length])
+  
+  console.log(props.chatarr);
+  
+  
+  useEffect(()=>{
+   if(props.chatarr.length>0){
     
-=======
->>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
+    setTimeout(()=>{
+    setvalue(props.chatarr);
+  },4000)
+   }
+   else{
+    setvalue('basemessage');
+   }
+    
+  },[props.chatarr])
+
+  
+ 
+   
+   
   return (
-    <section className='w-full'>
+    <section className={isMobile?'w-[169%]':'w-full'}>
     <div className='w-full border-b-[2px]'>
       <p className='text-white font-bold text-xl'>Questions</p>
     </div>
-    <section className='mt-10 flex flex-col gap-10'>
-<<<<<<< HEAD
-        { data[props.finalvalue]?.map((x)=>{
+    <section className='mt-4 flex flex-col gap-8'>
+        {data[value[value.length-1]?.question]?data[value[value.length-1].question].map((x)=>{
 
             return(
         <div className='w-full h-24 border-[2px] text-white p-3'>
            {x.questions}
-=======
-        { data[props.inputvalue]?.map((x)=>{
-
-            return(
-        <div className='w-full h-24 border-[2px] text-white p-3'>
-           {x.Questions}
->>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
         </div>
             )
         })
+        :
+        <div></div>
 }
   
     </section>
@@ -37,8 +59,4 @@ const Questions = (props) => {
   )
 }
 
-<<<<<<< HEAD
 export default Questions
-=======
-export default Questions
->>>>>>> 78957fbb4ec4c473585a4c7e0a0cc1605e15323e
